@@ -24,8 +24,9 @@ public class employeRestService {
 	private employeRepository employeRepository;
 	
 	@RequestMapping(value = "/getAllEmploye", method=RequestMethod.GET)
-	public List<employe> getAllEmploye() {
-		return employeRepository.findAll();
+	public Page<employe> getAllEmploye(@RequestParam(name="page", defaultValue = "0") int page, 
+			@RequestParam(name="size", defaultValue = "5") int size) {
+		return employeRepository.findAll(PageRequest.of(page, size));
 	}
 	
 	@RequestMapping(value = "/saveEmploye", method=RequestMethod.POST)

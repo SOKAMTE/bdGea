@@ -24,8 +24,9 @@ public class agenceRestService {
 	private agenceRepository agenceRepository;
 	
 	@RequestMapping(value = "/getAllAgence", method=RequestMethod.GET)
-	public List<agence> getAllAgence() {
-		return agenceRepository.findAll();
+	public Page<agence> getAllAgence(@RequestParam(name="page", defaultValue = "0") int page, 
+			@RequestParam(name="size", defaultValue = "5") int size) {
+		return agenceRepository.findAll(PageRequest.of(page, size));
 	}
 	
 	@RequestMapping(value = "/saveAgence", method=RequestMethod.POST)
